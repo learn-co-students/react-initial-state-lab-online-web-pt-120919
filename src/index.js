@@ -7,6 +7,6 @@ ReactDOM.render(
   <div>
     <ImageSlider />
     <Bomb initialCount={120} />
-  </div>,
+  </div>
   document.getElementById('root')
 );
