@@ -15,6 +15,6 @@ export default class Bomb extends Component {
 
         return(
         <div>{saying}</div>    
-            )            
+        )            
     }
 }
