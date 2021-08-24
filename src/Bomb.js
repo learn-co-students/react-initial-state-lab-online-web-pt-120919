@@ -6,38 +6,40 @@ class Bomb extends Component {
         super(props);
 
         this.state = {
-            secondsLeft: this.props.initialCount
+            secondsLeft: this.props.initialCount,
+            bombMessage: ''
         }
     }
 
   stopTimer = () => {
       if (this.state.secondsLeft <= 0){
+          clearInterval(this.myInterval)
+        console.log(this.state.secondsLeft)
         this.setState({
-            secondsLeft: 'Boom!'
+            bombMessage: 'Boom!'
         })
+      } else {
+          this.setState({bombMessage: `${this.state.secondsLeft} seconds left before I go boom!`,
+                        secondsLeft: this.state.secondsLeft - 1 })
       }
   }
 
     render() {
-        const {secondsLeft} = this.state
+        
         return (
             
-            <p>{this.state.secondsLeft === 0 ? "Boom!" : `${secondsLeft} seconds left before I go boom!`}</p>
+            <p>{this.state.bombMessage}</p>
 
         );
     }
 
     componentDidMount(){
         this.myInterval = setInterval(() => {
-            this.setState(({
-                secondsLeft: this.state.secondsLeft - 1})) 
-        }, 200)
+            this.stopTimer()
+        }, 50)
     }
 
-    componentWillUnmount() {
-        clearInterval(this.myInterval)
-    
-    }
+   
 
 }
 
