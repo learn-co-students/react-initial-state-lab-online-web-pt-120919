@@ -10,12 +10,33 @@ class Bomb extends Component {
         }
     }
 
-    render() {
+  stopTimer = () => {
+      if (this.state.secondsLeft <= 0){
+        this.setState({
+            secondsLeft: 'Boom!'
+        })
+      }
+  }
 
+    render() {
+        const {secondsLeft} = this.state
         return (
-            <p>{this.state.secondsLeft === 0 ? "Boom!" : `${this.state.secondsLeft} seconds left before I go boom!`}</p>
+            
+            <p>{this.state.secondsLeft === 0 ? "Boom!" : `${secondsLeft} seconds left before I go boom!`}</p>
 
         );
+    }
+
+    componentDidMount(){
+        this.myInterval = setInterval(() => {
+            this.setState(({
+                secondsLeft: this.state.secondsLeft - 1})) 
+        }, 200)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.myInterval)
+    
     }
 
 }
